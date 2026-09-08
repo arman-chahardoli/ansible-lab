@@ -1,0 +1,12 @@
+
+---
+- name: Install docker
+  import_tasks: install_docker.yml
+
+- name: Create SC4S directories
+  import_tasks: create_sc4s_directories.yml
+
+- name: Create SC4S Docker volumes
+  community.docker.docker_volume:
+    name: splunk-sc4s-var
+    state: present

@@ -1,0 +1,14 @@
+---
+- name: Create SC4S directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ sc4s_main_dir }}"
+    - "{{ sc4s_main_dir }}/docker-compose"
+    - "{{ sc4s_main_dir }}/env_file"
+    - "{{ sc4s_main_dir }}/local"
+    - "{{ sc4s_main_dir }}/local/config"
+    - "{{ sc4s_main_dir }}/local/context"
+    - "{{ sc4s_main_dir }}/log"
