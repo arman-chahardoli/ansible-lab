@@ -1,0 +1,7 @@
+---
+install_sftpgo:
+  base_path: "/opt/sftpgo"
+  fqdn: "sftpgo.local"
+  images:
+    sftpgo: "drakkan/sftpgo:v2.7.5"
+    nginx: "nginx:1.30.1"

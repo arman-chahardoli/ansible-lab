@@ -1,0 +1,13 @@
+---
+- name: Make docker-compose directory
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ install_sftpgo.base_path }}/docker-compose"
+
+- name: Copy docker-compose file
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ install_sftpgo.base_path }}/docker-compose/docker-compose.yml"
+    backup: yes

@@ -1,0 +1,16 @@
+- name: Make sftpgp directory hierarchy
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ install_sftpgo.base_path }}/config"
+    - "{{ install_sftpgo.base_path }}/data"
+    - "{{ install_sftpgo.base_path }}/data/srv"
+    - "{{ install_sftpgo.base_path }}/data/var"
+
+- name: Copy sftpgo config file
+  copy:
+    src: sftpgo.json
+    dest: "{{ install_sftpgo.base_path }}/config/sftpgo.json"
+    backup: yes
+  

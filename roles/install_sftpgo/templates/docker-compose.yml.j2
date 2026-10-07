@@ -1,0 +1,52 @@
+services:
+
+  sftpgo:
+    image: "{{ install_sftpgo.images.sftpgo }}"
+    container_name: sftpgo
+    restart: unless-stopped
+    stop_grace_period: 60s
+    ports:
+      # WebAdmin / WebClient
+      - "8080:8080"
+      # SFTP
+      - "2022:2022"
+      # FTP
+      - "21:21"
+      # FTP passive ports
+      - "50000-50100:50000-50100"
+    environment:
+      TZ: Asia/Tehran
+      SFTPGO_GRACE_TIME: "60"
+    volumes:
+      # Main configuration
+      - "{{ install_sftpgo.base_path }}/config/sftpgo.json:/var/lib/sftpgo/sftpgo.json:ro"
+      # User data + backups
+      - "{{ install_sftpgo.base_path }}/data/srv:/srv/sftpgo"
+      # Database + host keys + sftpgo.json + state
+      - "{{ install_sftpgo.base_path }}/data/var:/var/lib/sftpgo"
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - sftpgo
+
+  nginx:
+    image: "{{ install_sftpgo.images.nginx }}"
+    container_name: sftpgo-nginx
+    restart: unless-stopped
+    depends_on:
+      - sftpgo
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "{{ install_sftpgo.base_path }}/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "{{ install_sftpgo.base_path }}/nginx/conf.d:/etc/nginx/conf.d:ro"
+      - "{{ install_sftpgo.base_path }}/ssl:/opt/ssl:ro"
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - sftpgo
+
+networks:
+  sftpgo:
+    driver: bridge

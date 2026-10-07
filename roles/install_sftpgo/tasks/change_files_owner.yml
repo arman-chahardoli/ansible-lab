@@ -1,0 +1,6 @@
+- name: Change ownership recursively
+  file:
+    path: "{{ install_sftpgo.base_path }}/"
+    owner: "1000"
+    group: "1000"
+    recurse: true

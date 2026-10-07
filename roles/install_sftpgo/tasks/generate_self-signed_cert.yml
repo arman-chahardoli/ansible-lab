@@ -1,0 +1,19 @@
+---
+- name: Generate private key
+  command:
+    cmd: >
+      openssl genrsa
+      -out "{{ install_sftpgo.base_path }}/ssl/sftpgo.key"
+      2048
+    creates: "{{ install_sftpgo.base_path }}/ssl/sftpgo.key"
+
+- name: Generate self-signed certificate
+  command:
+    cmd: >
+      openssl req -x509 -new
+      -key "{{ install_sftpgo.base_path }}/ssl/sftpgo.key"
+      -out "{{ install_sftpgo.base_path }}/ssl/sftpgo.crt"
+      -days 3650
+      -subj "/CN={{ install_sftpgo.fqdn }}"
+      -addext "subjectAltName=DNS:{{ install_sftpgo.fqdn }}"
+    creates: "{{ install_sftpgo.base_path }}/ssl/sftpgo.crt"

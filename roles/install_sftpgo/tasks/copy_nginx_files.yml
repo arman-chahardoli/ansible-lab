@@ -1,0 +1,21 @@
+---
+- name: Make nginx directory
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ install_sftpgo.base_path }}/nginx"
+    - "{{ install_sftpgo.base_path }}/nginx/conf.d"
+    - "{{ install_sftpgo.base_path }}/ssl"
+
+- name: Copy nginx common config file
+  copy:
+    src: nginx.conf
+    dest: "{{ install_sftpgo.base_path }}/nginx/nginx.conf"
+    backup: yes
+
+- name: Copy sftpgo nginx config file
+  template:
+    src: sftpgo.conf.j2
+    dest: "{{ install_sftpgo.base_path }}/nginx/conf.d/sftpgo.conf"
+    backup: yes
