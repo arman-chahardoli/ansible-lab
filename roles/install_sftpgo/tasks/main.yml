@@ -14,11 +14,6 @@
   tags:
     - install_sftpgo:generate_cert
 
-#- name: Copy ssl files
-#  import_tasks: copy_ssl_files.yml
-#  tags:
-#    - install_sftpgo:copy_ssl
-
 - name: Copy sftpgo files
   import_tasks: copy_sftpgo_files.yml
   tags:

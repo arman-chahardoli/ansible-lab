@@ -24,7 +24,7 @@ also a **DNS hostname** pointing to the server.
 
 ```yaml
 # install_sftpgo/vars/main.yml
-
+---
 install_sftpgo:
   base_path: "/opt/sftpgo"
   fqdn: "ftp.example.com"
