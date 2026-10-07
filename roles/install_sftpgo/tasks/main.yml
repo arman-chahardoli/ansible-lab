@@ -1,0 +1,35 @@
+---
+- name: Copy nginx files
+  import_tasks: copy_nginx_files.yml
+  tags:
+    - install_sftpgo:copy_nginx
+
+- name: Copy docker-compose files
+  import_tasks: copy_docker-compose_files.yml
+  tags:
+    - install_sftpgo:copy_docker-compose
+
+- name: Generate self-signed certificates
+  import_tasks: generate_self-signed_cert.yml
+  tags:
+    - install_sftpgo:generate_cert
+
+#- name: Copy ssl files
+#  import_tasks: copy_ssl_files.yml
+#  tags:
+#    - install_sftpgo:copy_ssl
+
+- name: Copy sftpgo files
+  import_tasks: copy_sftpgo_files.yml
+  tags:
+    - install_sftpgo:copy_sftpgo_config
+
+- name: Change owner of files
+  import_tasks: change_files_owner.yml
+  tags:
+    - install_sftpgo:change_files_owner
+
+- name: Start sftpgo service 
+  import_tasks: start_sftpgo_service.yml
+  tags:
+    - install_sftpgo:start

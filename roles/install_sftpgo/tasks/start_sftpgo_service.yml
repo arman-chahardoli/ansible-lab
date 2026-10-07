@@ -1,0 +1,6 @@
+---
+- name: Start docker compose
+  command: docker compose up -d
+  args:
+    chdir: "{{ install_sftpgo.base_path }}/docker-compose"
+  become: yes
