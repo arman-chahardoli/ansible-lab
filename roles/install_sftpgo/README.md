@@ -62,7 +62,7 @@ Run:
 ansible-playbook -i inventory site.yml
 ```
 
-After deployment:
+After deployment and **Initial Setup**:
 
 ```text
 WebAdmin:  https://ftp.example.com/web/admin
